@@ -23,10 +23,13 @@ def delete_item(event):
     list_box.delete(tk.ANCHOR)
     tasklist.remove(selected_task)
 
-
-
-
-
+def open_task():
+    with open('tasks.txt', 'r') as file:
+        tasks=file.readlines()
+        for task in tasks:
+            if task !='\n':
+                list_box.insert(tk.END,task)
+                tasklist.append(task)
 
 heading =ttk.Label(root, text="ISHAN TASKS", font="Arial 20 bold")
 heading.pack(pady=15)
@@ -37,13 +40,15 @@ frame.pack(pady=10)
 task_entry=ttk.Entry(frame, font='arial 14',width=30)
 task_entry.pack()
 
-task_entry.bind('<Return>' ,add_task)
+task_entry.bind('<Return>', add_task)
 
 frame1 =ttk.Frame(root, width=400,height=250)
 frame1.pack(pady=10)
 
 list_box=tk.Listbox(frame1, font='arial 12', width=40,height=16)
 list_box.pack()
+
+open_task()
 
 delete_btn=ttk.Button(frame1, text="Delete Task", width=10)
 delete_btn.pack(pady=15)
