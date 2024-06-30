@@ -17,11 +17,16 @@ def add_task(event):
             file.write(f"{task}\n")
         list_box.insert(tk.END, task)
         tasklist.append(task)
+     
+            
 
 def delete_item(event):
     selected_task=list_box.get(tk.ANCHOR)
     list_box.delete(tk.ANCHOR)
     tasklist.remove(selected_task)
+    with open('tasks.txt', 'w') as file:
+        for task in tasklist:
+            file.write(f"{task}\n")
 
 def open_task():
     with open('tasks.txt', 'r') as file:
